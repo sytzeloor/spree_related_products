@@ -12,7 +12,7 @@ module Spree
         order = object
       end
 
-      return unless eligible?(order)
+      return 0 unless eligible?(order)
       total = order.line_items.inject(0) do |sum, line_item|
         relations =  Spree::Relation.where(*discount_query(line_item))
         discount_applies_to = relations.map {|rel| rel.related_to.master }
